@@ -21,10 +21,11 @@ override.tf.json
 !*_override.tf
 !*_override.tf.json
 
-# Exclude terraform.tfvars and secret variables
-# (Keeping variables.tf but ignoring actual secrets in .tfvars)
-*.tfvars
-*.tfvars.json
+# Exclude secret variables
+# *.tfvars files are allowed if they don't contain secrets.
+# Use .env or specific secret files for sensitive data.
+# *.tfvars
+# *.tfvars.json
 
 # Ignore tfplan
 tfplan
