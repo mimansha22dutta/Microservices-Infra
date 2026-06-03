@@ -39,6 +39,8 @@ Authentication to Azure is handled via **Workload Identity Federation (OIDC)**. 
 ### Monitoring
 You can monitor the status of the pipeline in the **Actions** tab of this repository.
 
+<!-- Triggering CI/CD re-run -->
+
 ## Features
 - **Terraform >= 1.5** capabilities used (optional object attributes, dynamic blocks).
 - **Environment Agnostic Modules:** Designed to be reusable across any environment simply by passing different variables.
