@@ -48,7 +48,6 @@ jobs:
     name: 'Plan and Apply'
     needs: validate
     runs-on: ubuntu-latest
-    environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
     
     # Map branch to directory
     env:
