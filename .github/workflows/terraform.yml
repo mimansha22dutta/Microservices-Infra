@@ -68,12 +68,14 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -input=false
         working-directory: ${{ env.TF_WORKING_DIR }}
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -out=tfplan
+        run: |
+          terraform plan -no-color -out=tfplan -input=false -parallelism=20
+          terraform show -no-color tfplan > tfplan.txt
         working-directory: ${{ env.TF_WORKING_DIR }}
 
       - name: Update PR with Plan
@@ -82,14 +84,16 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const output = `#### Terraform Plan 📖 \`${{ env.TF_WORKING_DIR }}\`
+            const fs = require('fs');
+            const plan = fs.readFileSync(`${process.env.TF_WORKING_DIR}/tfplan.txt`, 'utf8');
+            const output = `#### Terraform Plan 📖 \`${process.env.TF_WORKING_DIR}\`
             #### Terraform Initialization ⚙️
             #### Terraform Plan 📋
             
             <details><summary>Show Plan</summary>
             
             \`\`\`hcl
-            ${process.env.PLAN}
+            ${plan}
             \`\`\`
             
             </details>
@@ -102,10 +106,8 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
-        env:
-          PLAN: "terraform show -no-color tfplan"
 
       - name: Terraform Apply
         if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging')
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve -input=false -parallelism=20 tfplan
         working-directory: ${{ env.TF_WORKING_DIR }}
