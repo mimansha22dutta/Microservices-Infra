@@ -18,6 +18,27 @@ This repository provides a production-grade, modular, and DRY Terraform architec
 └── README.md
 ```
 
+## CI/CD Pipeline
+
+This project uses **GitHub Actions** for continuous integration and deployment.
+
+### Authentication
+Authentication to Azure is handled via **Workload Identity Federation (OIDC)**. This eliminates the need for long-lived secrets or certificates.
+
+### Pipeline Stages
+1. **Validate & Lint**:
+   - **Terraform Format**: Checks for proper indentation and style.
+   - **TFLint**: Performs static analysis to catch cloud-provider specific errors.
+   - **TFSec**: Scans the code for security vulnerabilities.
+2. **Plan**:
+   - Generates a `terraform plan` for the target environment.
+   - On Pull Requests, the plan is posted as a comment for review.
+3. **Apply**:
+   - Automatically deploys changes to the `staging` or `production` environment when changes are merged into the respective branches.
+
+### Monitoring
+You can monitor the status of the pipeline in the **Actions** tab of this repository.
+
 ## Features
 - **Terraform >= 1.5** capabilities used (optional object attributes, dynamic blocks).
 - **Environment Agnostic Modules:** Designed to be reusable across any environment simply by passing different variables.
