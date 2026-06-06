@@ -45,7 +45,7 @@ module "aks" {
   location            = module.resource_groups.resource_groups["aks"].location
   resource_group_name = module.resource_groups.resource_groups["aks"].name
   dns_prefix          = "aks-${var.environment}"
-  kubernetes_version  = "1.28" # Replace with valid version for your region
+  kubernetes_version  = "1.33" # Replace with valid version for your region
   sku_tier            = "Free"
 
   default_node_pool = {
