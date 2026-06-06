@@ -52,7 +52,7 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     
-    # Map branch to directory
+    # Mapping branch to directory
     env:
       TF_WORKING_DIR: ${{ github.ref == 'refs/heads/main' && 'environments/prod' || 'environments/staging' }}
 
@@ -89,9 +89,9 @@ jobs:
           script: |
             const fs = require('fs');
             const plan = fs.readFileSync(`${process.env.TF_WORKING_DIR}/tfplan.txt`, 'utf8');
-            const output = `#### Terraform Plan 📖 \`${process.env.TF_WORKING_DIR}\`
-            #### Terraform Initialization ⚙️
-            #### Terraform Plan 📋
+            const output = `#### Terraform Plan \`${process.env.TF_WORKING_DIR}\`
+            #### Terraform Initialization 
+            #### Terraform Plan 
             
             <details><summary>Show Plan</summary>
             
