@@ -55,7 +55,7 @@ module "aks" {
     min_count           = 1
     max_count           = 3
     node_count          = 1
-    zones               = ["1", "2", "3"]
+    zones               = []
   }
 
   identity_type = "SystemAssigned"

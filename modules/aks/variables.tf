@@ -50,7 +50,7 @@ variable "default_node_pool" {
     min_count           = optional(number, 1)
     max_count           = optional(number, 3)
     node_count          = optional(number, 1)
-    zones               = optional(list(string), ["1", "2", "3"])
+    zones               = optional(list(string), [])
   })
 }
 
@@ -117,7 +117,7 @@ variable "node_pools" {
     max_count            = optional(number, 3)
     node_count           = optional(number, 1)
     orchestrator_version = optional(string)
-    zones                = optional(list(string), ["1", "2", "3"])
+    zones                = optional(list(string), [])
     tags                 = optional(map(string), {})
   }))
   default = {}
