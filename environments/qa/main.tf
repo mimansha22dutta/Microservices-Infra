@@ -50,7 +50,7 @@ module "aks" {
 
   default_node_pool = {
     name                = "default"
-    vm_size             = "Standard_DS2_v2"
+    vm_size             = "standard_dc2as_v5"
     enable_auto_scaling = true
     min_count           = 1
     max_count           = 3
