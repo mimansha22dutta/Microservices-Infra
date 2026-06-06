@@ -1,5 +1,5 @@
 environment = "staging"
-location    = "eastus"
+location    = "westus"
 tags = {
   Project = "EnterpriseK8s"
   Owner   = "PlatformTeam"
